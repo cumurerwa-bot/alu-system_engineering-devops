@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 - Page Not Found</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: Georgia, serif;
+      color: #ffffff;
+      background: radial-gradient(circle at 50% 0%, #3b2a7a, #0f0c29 70%);
+    }
+    .ghost {
+      width: 140px;
+      height: 170px;
+      background: #ffffff;
+      border-radius: 70px 70px 0 0;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 83% 90%, 66% 100%, 50% 90%, 33% 100%, 16% 90%, 0 100%);
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+    }
+    .eye {
+      position: absolute;
+      top: 60px;
+      width: 18px;
+      height: 18px;
+      background: #0f0c29;
+      border-radius: 50%;
+    }
+    .eye.left { left: 38px; }
+    .eye.right { left: 84px; }
+    .mouth {
+      position: absolute;
+      top: 100px;
+      left: 60px;
+      width: 20px;
+      height: 26px;
+      background: #0f0c29;
+      border-radius: 50%;
+    }
+    .shadow {
+      width: 110px;
+      height: 14px;
+      margin-top: 18px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 50%;
+      animation: shrink 3s ease-in-out infinite;
+    }
+    h1 { font-size: 6rem; margin: 20px 0 0; letter-spacing: 8px; }
+    .french { font-size: 1.6rem; font-style: italic; margin: 8px 0; }
+    .small { opacity: 0.75; margin-bottom: 24px; }
+    a {
+      color: #fbbf24;
+      text-decoration: none;
+      border: 2px solid #fbbf24;
+      padding: 10px 22px;
+      border-radius: 30px;
+    }
+    a:hover { background: #fbbf24; color: #0f0c29; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+    }
+    @keyframes shrink {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(0.7); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ghost">
+    <div class="eye left"></div>
+    <div class="eye right"></div>
+    <div class="mouth"></div>
+  </div>
+  <div class="shadow"></div>
+  <h1>404</h1>
+  <p class="french">Ceci n'est pas une page</p>
+  <p class="small">The page you are looking for has vanished into thin air.</p>
+  <a href="/">Take me home</a>
+</body>
+</html>
