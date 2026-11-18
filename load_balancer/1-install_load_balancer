@@ -19,12 +19,12 @@ cat >> /etc/haproxy/haproxy.cfg << 'CFG'
 frontend http_front
     bind *:80
     mode http
+    option h1-case-adjust-bogus-client
     default_backend http_back
 
 backend http_back
     mode http
     balance roundrobin
-    option h1-case-adjust-bogus-server
     server 7417-web-01 18.170.66.177:80 check
     server 7417-web-02 52.56.73.27:80 check
 CFG
