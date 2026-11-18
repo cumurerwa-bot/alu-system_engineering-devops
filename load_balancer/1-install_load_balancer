@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Installs and configures HAProxy to round-robin traffic to web-01 and web-02
+
+apt-get update -y
+apt-get install -y haproxy
+
+# Enable the init script
+if grep -q '^ENABLED=' /etc/default/haproxy; then
+    sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
+else
+    echo 'ENABLED=1' >> /etc/default/haproxy
+fi
+
+# Preserve header capitalization and append frontend/backend config (idempotent)
+if ! grep -q "7417-web-01" /etc/haproxy/haproxy.cfg; then
+    sed -i '/^global/a \    h1-case-adjust x-served-by X-Served-By' /etc/haproxy/haproxy.cfg
+cat >> /etc/haproxy/haproxy.cfg << 'CFG'
+
+frontend http_front
+    bind *:80
+    mode http
+    default_backend http_back
+
+backend http_back
+    mode http
+    balance roundrobin
+    option h1-case-adjust-bogus-server
+    server 7417-web-01 18.170.66.177:80 check
+    server 7417-web-02 52.56.73.27:80 check
+CFG
+fi
+
+haproxy -c -f /etc/haproxy/haproxy.cfg && service haproxy restart
