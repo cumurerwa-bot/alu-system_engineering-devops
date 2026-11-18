@@ -9,6 +9,6 @@ if ! grep -q "X-Served-By" /etc/nginx/sites-available/default; then
     sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By \$hostname;/" /etc/nginx/sites-available/default
 fi
 
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
 
 nginx -t && service nginx restart
